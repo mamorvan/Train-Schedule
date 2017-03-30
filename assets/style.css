@@ -1,0 +1,16 @@
+body {
+	width: 1000px;
+	background-color: black;
+	margin: 0 auto;
+	font-family: "Share", sans-serif;
+}
+
+.jumbotron {
+	background-image: url("trainstation.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	font-family: "Monoton", sans-serif;
+	text-align: center;
+	text-shadow: 2px 2px 2px #FBF4D6;
+}
