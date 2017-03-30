@@ -42,7 +42,12 @@ button {
 	margin: 0 10px;
 }
 
+#addTrain:hover {
+	color: #19BE05;
+	border: 2px solid #19BE05;
+}
+
 #clearTrains:hover {
-	color: red;
-	border: 2px solid red;
+	color: #ED0039;
+	border: 2px solid #ED0039;
 }
