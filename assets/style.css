@@ -9,8 +9,34 @@ body {
 	background-image: url("trainstation.jpg");
 	background-size: cover;
 	background-position: center;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat;	
+}
+
+h1 {
 	font-family: "Monoton", sans-serif;
 	text-align: center;
 	text-shadow: 2px 2px 2px #FBF4D6;
+	letter-spacing: 3px;
+}
+
+.panel-heading {
+	padding: 5px 10px;
+	text-align: center;
+}
+
+h3 {
+	font-size: 20px;
+}
+
+#button {
+	text-align: center;
+}
+
+button {
+	background-color: #FBF4D6;
+	padding:  5px 20px;
+	border: 2px solid black;
+	border-radius: 5px;
+	font-size: 20px;
+	color: #8A6D3B;
 }
