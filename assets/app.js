@@ -11,8 +11,10 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-var currentTime = moment().format("h:mm");
+setInterval(function(){
+	var currentTime = moment().format("h:mm");
 $("#currentTime").html(currentTime);
+}, 1000);
 
 
 //ADD TRAIN BUTTON
@@ -55,21 +57,15 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey){
 	var newFrequency = childSnapshot.val().frequency;
 
 	var firstTimeConverted = moment(newFirstTime, "hh:mm").subtract(1,"days");
-console.log(firstTimeConverted);
 	
 	var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-console.log(diffTime);
 	
 	var timeRemainder = diffTime % newFrequency;
-console.log(timeRemainder);
 
 	var minutesTillNext = newFrequency - timeRemainder;
-console.log(minutesTillNext);
 
 	var nextArrival = moment().add(minutesTillNext, "minutes");
 	var nextArrivalConverted = moment(nextArrival).format("hh:mm");
-console.log(nextArrivalConverted);	
-	
 
 	$("#trainScheduleTable").append("<tr><td>" + newTrainName + "</td><td>" + newDestination + "</td><td>" + newFrequency + "</td><td>" +  nextArrivalConverted + "</td><td>" + minutesTillNext + "</td></tr>");
 
