@@ -28,7 +28,7 @@ h3 {
 	font-size: 20px;
 }
 
-#button {
+#buttonDiv {
 	text-align: center;
 }
 
@@ -39,4 +39,10 @@ button {
 	border-radius: 5px;
 	font-size: 20px;
 	color: #8A6D3B;
+	margin: 0 10px;
+}
+
+#clearTrains:hover {
+	color: red;
+	border: 2px solid red;
 }
