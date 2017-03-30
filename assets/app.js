@@ -11,6 +11,10 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+var currentTime = moment().format("h:mm");
+$("#currentTime").html(currentTime);
+
+
 //ADD TRAIN BUTTON
 
 $("#addTrain").on("click", function(event){
@@ -50,11 +54,26 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey){
 	var newFirstTime = childSnapshot.val().firstTime;
 	var newFrequency = childSnapshot.val().frequency;
 
-	console.log(newTrainName + " | " + newDestination + " | " + newFirstTime + " | " + newFrequency);
+	var firstTimeConverted = moment(newFirstTime, "hh:mm").subtract(1,"days");
+console.log(firstTimeConverted);
+	
+	var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+console.log(diffTime);
+	
+	var timeRemainder = diffTime % newFrequency;
+console.log(timeRemainder);
 
-	$("#trainScheduleTable").append("<tr><td>" + newTrainName + "</td><td>" + newDestination + "</td><td>" + newFrequency + "</td><td>" +  "next arrival" + "</td><td>" + "minutes away" + "</td></tr>");
+	var minutesTillNext = newFrequency - timeRemainder;
+console.log(minutesTillNext);
 
-}) //end of firebase child added event
+	var nextArrival = moment().add(minutesTillNext, "minutes");
+	var nextArrivalConverted = moment(nextArrival).format("hh:mm");
+console.log(nextArrivalConverted);	
+	
+
+	$("#trainScheduleTable").append("<tr><td>" + newTrainName + "</td><td>" + newDestination + "</td><td>" + newFrequency + "</td><td>" +  nextArrivalConverted + "</td><td>" + minutesTillNext + "</td></tr>");
+
+}); //end of firebase child added event
 
 
 //CLEAR ALL TRAINS BUTTON
@@ -62,7 +81,9 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey){
 $("#clearTrains").on("click", function(event){
 	event.preventDefault();
 
-	confirm("Are you sure you want to clear all the trains?");
+	confirm("Are you sure you want to clear all the trains?  This will erase all saved data!");
+
 	database.ref().remove();
+	$("#trainScheduleTable").empty();
 
 }); //end of clearTrains button click
